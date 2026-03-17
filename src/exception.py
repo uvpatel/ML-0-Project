@@ -1,5 +1,5 @@
 import sys
-import logging
+
 
 # Support both `python -m src.exception` (from project root)
 # and `python exception.py` (from src directory).
@@ -36,5 +36,6 @@ if __name__=="__main__":
     except Exception as e:
         logging.info("Divide by zero error occurred")
         raise CustomException(e, sys)
-    
+
+
     
