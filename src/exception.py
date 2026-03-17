@@ -1,8 +1,18 @@
 import sys
 import logging
 
+# Support both `python -m src.exception` (from project root)
+# and `python exception.py` (from src directory).
+try:
+    from src.logger import logging
+except ModuleNotFoundError:
+    from logger import logging
+
+
+
 def error_message_detail(error, error_detail: sys):
     # 
+    
     _, _, exc_tb = error_detail.exc_info()
     error_message = f"Error occurred in file: {file_name} at line number: {line_number} with error message: {str(error)}"
     file_name = exc_tb.tb_frame.f_code.co_filename , str(error)
