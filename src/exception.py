@@ -11,14 +11,10 @@ except ModuleNotFoundError:
 
 
 def error_message_detail(error, error_detail: sys):
-    # 
-    
     _, _, exc_tb = error_detail.exc_info()
-    error_message = f"Error occurred in file: {file_name} at line number: {line_number} with error message: {str(error)}"
-    file_name = exc_tb.tb_frame.f_code.co_filename , str(error)
-    line_number = exc_tb.tb_lineno
-    error_message = f"Error occurred in file: {file_name} at line number: {line_number} with error message: {str(error)}"
-    return error_message
+    file_name = exc_tb.tb_frame.f_code.co_filename if exc_tb else "Unknown"
+    line_number = exc_tb.tb_lineno if exc_tb else -1
+    return f"Error occurred in file: {file_name} at line number: {line_number} with error message: {str(error)}"
 
 
 class CustomException(Exception):

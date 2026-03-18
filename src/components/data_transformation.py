@@ -80,7 +80,7 @@ class DataTransformation:
 
             numerical_columns= ["writing_score", "reading_score"]
 
-            input_feature_train_df = train_df.drop(columns=[target_column_name], axis=1)
+            input_feature_train_df = train_df.drop(columns=[target_column_name])
 
             target_feature_train_df = train_df[target_column_name]
 
@@ -106,7 +106,6 @@ class DataTransformation:
             return (
                 train_arr,
                 test_arr,
-                
                 self.data_transformation_config.preprocessor_ob_file_path
             )
             

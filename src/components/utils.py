@@ -27,7 +27,7 @@ def evaluate_model(X, y, X_test,y_test,models):
         for model_name, model in models.items():
             model.fit(X, y)
             predictions = model.predict(X_test)
-            report[model_name] = r2_score(y, predictions)
+            report[model_name] = r2_score(y_test, predictions)
 
         return report
     except Exception as e:
