@@ -13,3 +13,8 @@ data validation
 1) what kind of data set of with starts with
 
 2) da
+
+
+r2 score prediction
+
+

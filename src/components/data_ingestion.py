@@ -2,12 +2,25 @@
 
 import os
 import sys
+
+# Support running this file directly: python src/components/data_ingestion.py
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
-
+from src.components.data_transformation  import DataTransformation
+from src.components.data_transformation  import DataTransformationConfig
 from dataclasses import dataclass
+
+
+
+
+# A dataclass is a decorator in Python that automatically generates special methods like __init__, __repr__, and __eq__ based on the attributes defined in the class.
 
 
 @dataclass
@@ -32,7 +45,7 @@ class DataIngestion:
             # combine train and test data and save raw data
             os.makedirs(os.path.dirname(self.data_ingestion_config.train_data_path), exist_ok=True)
 
-            df.to_csv(self.ingestion_config.train_data_path, index=False, header=True)
+            df.to_csv(self.data_ingestion_config.raw_data_path, index=False, header=True)
 
             logging.info("Train and Test data combined and saved as raw data")
             
@@ -56,5 +69,10 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data = obj.initiate_data_ingestion()
+
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
+
+    
     
